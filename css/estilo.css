@@ -53,7 +53,7 @@ select{
     font-size: 14px;
     height: 35px;
     padding: 5px; /* If you add too much padding here, the options won't show in IE */
-    width: 6em;
+    width: 12em;
     background-color: #213656;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
