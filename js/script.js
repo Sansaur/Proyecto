@@ -13,6 +13,7 @@ var movilidadesPR = new Array();
 // Global para poner los markers
 var map;
 
+
 // Para cerrar las ventanas de información cuando se hace click en otra
 var globalInfoWindow;
 
@@ -29,8 +30,6 @@ var booleanoColapsado = true;
  *
  */
 function cargarPag() {
-    document.getElementsByTagName("html")[0].setAttribute("lang", "es");
-
     cargarEventos();
     cargarJSON();
     // Llamamos a altenrarPosibilidades una vez para que se nos genere el combo de los países
@@ -73,7 +72,7 @@ function cargarEventos() {
             document.getElementById("Controles").setAttribute("style", "height:100vh");
             document.getElementById("Mapa").setAttribute("style", "display:none");
         } else {
-            document.getElementById("Controles").setAttribute("style", "height:0vh");
+            document.getElementById("Controles").setAttribute("style", "height:0vh;display:none;visibility:hidden;");
             document.getElementById("Mapa").setAttribute("style", "position: relative; overflow: hidden;");
         }
         booleanoColapsado = !booleanoColapsado;
@@ -296,6 +295,16 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
                     var infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
+                    if (this.getAnimation() !== null) {
+                      this.setAnimation(null);
+                    } else {
+                      this.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                    for(var i in markersEnMapa){
+                      if(markersEnMapa[i] !== this){
+                        markersEnMapa[i].setAnimation(null);
+                      }
+                    }
                     infowindow.open(map, this);
                     globalInfoWindow = infowindow;
                     map.setZoom(parseInt(document.getElementById("zoomVariable").value));

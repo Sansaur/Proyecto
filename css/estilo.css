@@ -87,6 +87,15 @@ select{
 #zonaNoVariable>div:nth-child(2){
     margin-left:2em;
 }
+#botonEnviar{
+    background-color:#213699;
+}
+#botonEnviar:active{
+    background-color:#2136ff;
+    -webkit-box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
+-moz-box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
+box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
+}
 
 @media screen and (max-width: 525px){
     #Controles{
@@ -95,10 +104,15 @@ select{
     }
     #Mapa{
         width: 100%;
-        height: 95vh;
+        height: 85vh;
     }
     #botonColapsar{
+      width: 100%;
         display:initial;
+    }
+    #botonEnviar{
+      margin-top: 1em;
+      width: 100%;
     }
     #cajaSwitch{
         display: flex;
@@ -114,6 +128,9 @@ select{
     #zonaNoVariable>div:nth-child(2){
         margin-left:0em;
         margin-top:1em;
+    }
+    select{
+        width:100%;
     }
 }
 

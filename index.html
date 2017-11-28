@@ -42,7 +42,7 @@
         1) Capacidad de hacer centro en determinados países
 
 -->
-<html>
+<html lang="es">
     <head>
         <link rel="shortcut icon" href="favicon.ico" />
         <title>Mapa Google Maps</title>
@@ -55,7 +55,7 @@
         <script src="js/script.js"></script>
     </head>
     <body>
-            <button id="botonColapsar" type="button">Extiende/Colapsa el menú</button>
+        <button id="botonColapsar" type="button">Extiende/Colapsa el menú</button>
             <h1> ¿Donde se hace el Erasmus? </h1>
         <div id="Controles">
             <div id="zonaNoVariable">
@@ -68,7 +68,7 @@
                     <option value="GM">Grado Medio</option>
                     <option value="GS">Grado Superior</option>
                 </select>
-            </label>
+            </label><br>
             <label class="verticalAlign">¿Zoom a usar?
                 <select title="Selecciona la movilidad" name="zoomVariable" id="zoomVariable">
                     <option value="5" selected>Pais</option>
@@ -76,7 +76,6 @@
                     <option value="15">Punto</option>
                 </select>
             </label>
-            <button id="botonZoom" type="button">Centrar Europa</button>
             </div>
             <div id="cajaSwitch">
             <label for="selectorCicloPais" class="verticalAlign"> Ciclos </label>
@@ -86,6 +85,7 @@
             </label>
             <label for="selectorCicloPais" class="verticalAlign"> Paises </label>
             </div>
+            <button id="botonZoom" type="button">Centrar Europa</button>
             </div>
             <div id="zonaVariable">
             </div>
