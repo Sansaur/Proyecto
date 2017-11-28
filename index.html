@@ -43,24 +43,26 @@
 
 -->
 <html lang="es">
-    <head>
-        <link rel="shortcut icon" href="favicon.ico" />
-        <title>Mapa Google Maps</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/estilo.css">
-        <!-- Hace falta una clave -->
-        <!-- IMPORTANTÍSIMO: SACAR LA CLAVE EN CASA -->
-        <!-- key=MI_CLAVE y luego callback=FUNCION_CARGA_MAPA -->
-        <script src="js/script.js"></script>
-    </head>
-    <body>
-        <button id="botonColapsar" type="button">Extiende/Colapsa el menú</button>
-            <h1> ¿Donde se hace el Erasmus? </h1>
-        <div id="Controles">
-            <div id="zonaNoVariable">
-            <div id="cajaMov">
-            <label>
+
+<head>
+  <link rel="shortcut icon" href="favicon.ico" />
+  <title>Mapa Google Maps</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/estilo.css">
+  <!-- Hace falta una clave -->
+  <!-- IMPORTANTÍSIMO: SACAR LA CLAVE EN CASA -->
+  <!-- key=MI_CLAVE y luego callback=FUNCION_CARGA_MAPA -->
+  <script src="js/script.js"></script>
+</head>
+
+<body>
+  <button id="botonColapsar" type="button">Extiende/Colapsa el menú</button>
+  <h1> ¿Donde se hace el Erasmus? </h1>
+  <div id="Controles">
+    <div id="zonaNoVariable">
+      <div id="cajaMov">
+        <label>
                 Selección de movilidad<br>
                 <select title="Selecciona la movilidad" name="seleccionMovilidad" id="seleccionMovilidad">
                     <option value="Todos" selected>Todos</option>
@@ -69,29 +71,30 @@
                     <option value="GS">Grado Superior</option>
                 </select>
             </label><br>
-            <label class="verticalAlign">¿Zoom a usar?<br>
+        <label class="verticalAlign">¿Zoom a usar?<br>
                 <select title="Selecciona la movilidad" name="zoomVariable" id="zoomVariable">
                     <option value="5" selected>Pais</option>
                     <option value="9">Ciudad</option>
                     <option value="15">Punto</option>
                 </select>
             </label>
-            </div>
-            <div id="cajaSwitch">
-            <label for="selectorCicloPais" class="verticalAlign"> Ciclos </label>
-            <label class="switch" title="Cambiar filtro entre Ciclos o Paises"  id="clickCicloPais"> S
+      </div>
+      <div id="cajaSwitch">
+        <label for="selectorCicloPais" class="verticalAlign"> Ciclos </label>
+        <label class="switch" title="Cambiar filtro entre Ciclos o Paises" id="clickCicloPais"> S
                 <input type="checkbox" title="Cambiar filtro entre Ciclos o Paises" id="selectorCicloPais" checked>
                 <span class="slider round"></span>
             </label>
-            <label for="selectorCicloPais" class="verticalAlign"> Paises </label>
-            </div>
-            <button id="botonZoom" type="button">Centrar Europa</button>
-            </div>
-            <div id="zonaVariable">
-            </div>
-            <button id="botonEnviar" type="button">Busca en el mapa</button>
-        </div>
-        <div id="Mapa"></div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE&callback=cargaInicialMapaGoogle"></script>
-    </body>
+        <label for="selectorCicloPais" class="verticalAlign"> Paises </label>
+      </div>
+      <button id="botonZoom" type="button">Centrar Europa</button>
+    </div>
+    <div id="zonaVariable">
+    </div>
+    <button id="botonEnviar" type="button">Busca en el mapa</button>
+  </div>
+  <div id="Mapa"></div>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE&callback=cargaInicialMapaGoogle"></script>
+</body>
+
 </html>

@@ -30,10 +30,10 @@ var booleanoColapsado = true;
  *
  */
 function cargarPag() {
-    cargarEventos();
-    cargarJSON();
-    // Llamamos a altenrarPosibilidades una vez para que se nos genere el combo de los países
-    alternarPosibilidades();
+  cargarEventos();
+  cargarJSON();
+  // Llamamos a altenrarPosibilidades una vez para que se nos genere el combo de los países
+  alternarPosibilidades();
 }
 /**
  * cargarJSON - Guarda en arrays globales la información de los JSON sacados de la función loadJSON
@@ -42,133 +42,133 @@ function cargarPag() {
  * @return undefined
  */
 function cargarJSON() {
-    loadJSON(function (response) {
-        // Parse JSON string into object
-        actual_JSON = JSON.parse(response);
-        for (var i in actual_JSON) {
-            switch (actual_JSON[i].tipo) {
-                case "Grado Medio":
-                    movilidadesGM.push(actual_JSON[i]);
-                    break;
-                case "Grado Superior":
-                    movilidadesGS.push(actual_JSON[i]);
-                    break;
-                default:
-                    movilidadesPR.push(actual_JSON[i]);
-                    break;
-            }
-        }
-    });
+  loadJSON(function(response) {
+    // Parse JSON string into object
+    actual_JSON = JSON.parse(response);
+    for (var i in actual_JSON) {
+      switch (actual_JSON[i].tipo) {
+        case "Grado Medio":
+          movilidadesGM.push(actual_JSON[i]);
+          break;
+        case "Grado Superior":
+          movilidadesGS.push(actual_JSON[i]);
+          break;
+        default:
+          movilidadesPR.push(actual_JSON[i]);
+          break;
+      }
+    }
+  });
 }
 
 function cargarEventos() {
-    document.getElementById("botonEnviar").addEventListener('click', function () {
-        montarMapa();
-    }, false);
-    document.getElementById("clickCicloPais").addEventListener('click', alternarPosibilidades, false);
-    document.getElementById("seleccionMovilidad").addEventListener('change', alternarPosibilidades, false);
-    document.getElementById("botonColapsar").addEventListener('click', function(){
-        if(booleanoColapsado){
-            document.getElementById("Controles").setAttribute("style", "height:100vh");
-            document.getElementById("Mapa").setAttribute("style", "display:none");
-        } else {
-            document.getElementById("Controles").setAttribute("style", "height:0vh;display:none;visibility:hidden;");
-            document.getElementById("Mapa").setAttribute("style", "position: relative; overflow: hidden;");
-        }
-        booleanoColapsado = !booleanoColapsado;
-    }, false);
-    document.getElementById("botonZoom").addEventListener('click', function () {
-        var nuevoZoom = 5;
-        // Zoom del teléfono
-        if (window.innerWidth <= 525) {
-            nuevoZoom = 4;
-        }
-        map.setZoom(nuevoZoom);
-        map.setCenter(traducirCiudadPosicion("Múnich", "Alemania"));
-    }, false);
+  document.getElementById("botonEnviar").addEventListener('click', function() {
+    montarMapa();
+  }, false);
+  document.getElementById("clickCicloPais").addEventListener('click', alternarPosibilidades, false);
+  document.getElementById("seleccionMovilidad").addEventListener('change', alternarPosibilidades, false);
+  document.getElementById("botonColapsar").addEventListener('click', function() {
+    if (booleanoColapsado) {
+      document.getElementById("Controles").setAttribute("style", "height:100vh");
+      document.getElementById("Mapa").setAttribute("style", "display:none");
+    } else {
+      document.getElementById("Controles").setAttribute("style", "height:0vh;display:none;visibility:hidden;");
+      document.getElementById("Mapa").setAttribute("style", "position: relative; overflow: hidden;");
+    }
+    booleanoColapsado = !booleanoColapsado;
+  }, false);
+  document.getElementById("botonZoom").addEventListener('click', function() {
+    var nuevoZoom = 5;
+    // Zoom del teléfono
+    if (window.innerWidth <= 525) {
+      nuevoZoom = 4;
+    }
+    map.setZoom(nuevoZoom);
+    map.setCenter(traducirCiudadPosicion("Múnich", "Alemania"));
+  }, false);
 }
 
 function alternarPosibilidades() {
-    limpiarChildren(document.getElementById("zonaVariable"));
-    // ON = PAISES
-    // OFF = CICLOS
-    if (document.getElementById("selectorCicloPais").checked) {
-        cargarPaises();
-    } else {
-        cargarCiclos();
-    }
+  limpiarChildren(document.getElementById("zonaVariable"));
+  // ON = PAISES
+  // OFF = CICLOS
+  if (document.getElementById("selectorCicloPais").checked) {
+    cargarPaises();
+  } else {
+    cargarCiclos();
+  }
 }
 
 function traducirCiudadPosicion(ciudad, pais) {
-    var devolver;
-    geocodificacion(function (response) {
-        var nuestroJSON = JSON.parse(response);
-        // Usar respuesta.lat y respuesta.lng ~~~~~
-        devolver = nuestroJSON.results[0].geometry.location;
-        // Para que se separen un poco los stacks
-        devolver.lat += Math.random() / 15;
-        devolver.lng += Math.random() / 15;
-    }, ciudad, pais);
-    return devolver;
+  var devolver;
+  geocodificacion(function(response) {
+    var nuestroJSON = JSON.parse(response);
+    // Usar respuesta.lat y respuesta.lng ~~~~~
+    devolver = nuestroJSON.results[0].geometry.location;
+    // Para que se separen un poco los stacks
+    devolver.lat += Math.random() / 15;
+    devolver.lng += Math.random() / 15;
+  }, ciudad, pais);
+  return devolver;
 }
 
 function cargarPaises() {
-    var listaPosibilidades = retornaListaSeleccioandos();
-    var listaPaises = new Array();
-    for (var i in listaPosibilidades) {
-        if (!listaPaises.includes(listaPosibilidades[i].pais)) {
-            listaPaises.push(listaPosibilidades[i].pais);
-        }
+  var listaPosibilidades = retornaListaSeleccioandos();
+  var listaPaises = new Array();
+  for (var i in listaPosibilidades) {
+    if (!listaPaises.includes(listaPosibilidades[i].pais)) {
+      listaPaises.push(listaPosibilidades[i].pais);
     }
-    var nuevaLabel = crearNodo("LABEL", "Selecciona un país: ", ["title"], ["Selecciona un país"]);
-    var nuevoElemento = crearNodo("SELECT", null, ["id", "title"], ["comboPaises", "Selecciona un país"]);
-    nuevaLabel.appendChild(nuevoElemento);
-    for (var i in listaPaises) {
-        if (listaPaises[i]) {
-            nuevoElemento.appendChild(crearNodo("OPTION", listaPaises[i], ["value"], [listaPaises[i]]));
-        }
+  }
+  var nuevaLabel = crearNodo("LABEL", "Selecciona un país: ", ["title"], ["Selecciona un país"]);
+  var nuevoElemento = crearNodo("SELECT", null, ["id", "title"], ["comboPaises", "Selecciona un país"]);
+  nuevaLabel.appendChild(nuevoElemento);
+  for (var i in listaPaises) {
+    if (listaPaises[i]) {
+      nuevoElemento.appendChild(crearNodo("OPTION", listaPaises[i], ["value"], [listaPaises[i]]));
     }
-    document.getElementById("zonaVariable").appendChild(nuevaLabel);
+  }
+  document.getElementById("zonaVariable").appendChild(nuevaLabel);
 }
 
 function cargarCiclos() {
-    var listaPosibilidades = retornaListaSeleccioandos();
-    var listaCiclos = new Array();
-    for (var i in listaPosibilidades) {
-        if (!listaCiclos.includes(listaPosibilidades[i].ciclo)) {
-            listaCiclos.push(listaPosibilidades[i].ciclo);
-        }
+  var listaPosibilidades = retornaListaSeleccioandos();
+  var listaCiclos = new Array();
+  for (var i in listaPosibilidades) {
+    if (!listaCiclos.includes(listaPosibilidades[i].ciclo)) {
+      listaCiclos.push(listaPosibilidades[i].ciclo);
     }
-    var nuevoElemento = crearNodo("P", null, null, null);
-    var nuevoButton = crearNodo("BUTTON", "Selecciona todas si están todas vacías. Deselecciona todas si hay al menos una seleccionada", ["id", "title"], ["seleccion", "Seleccionar/Deseleccionar todo"]);
-    nuevoButton.addEventListener('click', function () {
-        var listaCheckBoxCreados = document.querySelectorAll(".ciclo");
-        var deseleccionar = false;
-        for (var i = 0; i < listaCheckBoxCreados.length; i++) {
-            if (listaCheckBoxCreados[i].checked) {
-                deseleccionar = true;
-                break;
-            }
-            listaCheckBoxCreados[i].click();
-        }
-        if (deseleccionar) {
-            for (var i = 0; i < listaCheckBoxCreados.length; i++) {
-                listaCheckBoxCreados[i].checked = false;
-            }
-        }
-    }, false);
-    nuevoElemento.appendChild(nuevoButton);
-    var nuevoDiv = crearNodo("DIV", null, ["id"], ["contenedorCheckboxes"]);
-    document.getElementById("zonaVariable").appendChild(nuevoElemento);
-    for (var i in listaCiclos) {
-        if (listaCiclos[i]) {
-            nuevoElemento = crearNodo("LABEL", null, null, null);
-            nuevoElemento.appendChild(crearNodo("INPUT", null, ["type", "class", "name", "value"], ["checkbox", "ciclo", "ciclo", listaCiclos[i]]));
-            nuevoElemento.appendChild(document.createTextNode(listaCiclos[i]));
-            nuevoDiv.appendChild(nuevoElemento);
-        }
+  }
+  var nuevoElemento = crearNodo("P", null, null, null);
+  var nuevoButton = crearNodo("BUTTON", "Selecciona todas si están todas vacías. Deselecciona todas si hay al menos una seleccionada", ["id", "title"], ["seleccion", "Seleccionar/Deseleccionar todo"]);
+  nuevoButton.addEventListener('click', function() {
+    var listaCheckBoxCreados = document.querySelectorAll(".ciclo");
+    var deseleccionar = false;
+    for (var i = 0; i < listaCheckBoxCreados.length; i++) {
+      if (listaCheckBoxCreados[i].checked) {
+        deseleccionar = true;
+        break;
+      }
+      listaCheckBoxCreados[i].click();
     }
-    document.getElementById("zonaVariable").appendChild(nuevoDiv);
+    if (deseleccionar) {
+      for (var i = 0; i < listaCheckBoxCreados.length; i++) {
+        listaCheckBoxCreados[i].checked = false;
+      }
+    }
+  }, false);
+  nuevoElemento.appendChild(nuevoButton);
+  var nuevoDiv = crearNodo("DIV", null, ["id"], ["contenedorCheckboxes"]);
+  document.getElementById("zonaVariable").appendChild(nuevoElemento);
+  for (var i in listaCiclos) {
+    if (listaCiclos[i]) {
+      nuevoElemento = crearNodo("LABEL", null, null, null);
+      nuevoElemento.appendChild(crearNodo("INPUT", null, ["type", "class", "name", "value"], ["checkbox", "ciclo", "ciclo", listaCiclos[i]]));
+      nuevoElemento.appendChild(document.createTextNode(listaCiclos[i]));
+      nuevoDiv.appendChild(nuevoElemento);
+    }
+  }
+  document.getElementById("zonaVariable").appendChild(nuevoDiv);
 }
 
 /**
@@ -178,23 +178,23 @@ function cargarCiclos() {
  * @return {Array}  listaPosibilidades contiene la lista de información JSON posible para lo seleccionado.
  */
 function retornaListaSeleccioandos() {
-    var seleccionado = document.getElementById("seleccionMovilidad").value;
-    var listaPosibilidades;
-    switch (seleccionado) {
-        case "Todos":
-            listaPosibilidades = actual_JSON;
-            break;
-        case "profesores":
-            listaPosibilidades = movilidadesPR;
-            break;
-        case "GM":
-            listaPosibilidades = movilidadesGM;
-            break;
-        case "GS":
-            listaPosibilidades = movilidadesGS;
-            break;
-    }
-    return listaPosibilidades;
+  var seleccionado = document.getElementById("seleccionMovilidad").value;
+  var listaPosibilidades;
+  switch (seleccionado) {
+    case "Todos":
+      listaPosibilidades = actual_JSON;
+      break;
+    case "profesores":
+      listaPosibilidades = movilidadesPR;
+      break;
+    case "GM":
+      listaPosibilidades = movilidadesGM;
+      break;
+    case "GS":
+      listaPosibilidades = movilidadesGS;
+      break;
+  }
+  return listaPosibilidades;
 }
 /*
  *
@@ -209,50 +209,56 @@ function retornaListaSeleccioandos() {
  */
 function montarMapa() {
 
-    var listaPosibilidades = retornaListaSeleccioandos();
-    var arrayCiudades = new Array();
-    var arrayLongitudLatitud = new Array();
-    var arrayInformacion = new Array();
+  var listaPosibilidades = retornaListaSeleccioandos();
+  var arrayCiudades = new Array();
+  var arrayLongitudLatitud = new Array();
+  var arrayInformacion = new Array();
 
-    // Limpiamos todos los markers que haya en el mapa ahora mismo.
-    if (markersEnMapa) {
-        for (var i in markersEnMapa) {
-            markersEnMapa[i].setMap(null);
-        }
+  // Limpiamos todos los markers que haya en el mapa ahora mismo.
+  if (markersEnMapa) {
+    for (var i in markersEnMapa) {
+      markersEnMapa[i].setMap(null);
     }
-    if (document.getElementById("selectorCicloPais").checked) {
+  }
+  if (document.getElementById("selectorCicloPais").checked) {
 
-        // Rellenamos un array de latitud-longitud con la lista de posibilidades (El tipo de movimiento)
-        // y el país seleccionado
-        for (var i in listaPosibilidades) {
-            if (listaPosibilidades[i].pais === document.getElementById("comboPaises").value) {
-                if (!arrayLongitudLatitud.includes(traducirCiudadPosicion(listaPosibilidades[i].ciudad, listaPosibilidades[i].pais))) {
-                    arrayLongitudLatitud.push(traducirCiudadPosicion(listaPosibilidades[i].ciudad, listaPosibilidades[i].pais));
-                    arrayCiudades.push(listaPosibilidades[i].ciudad);
-                    arrayInformacion.push({movilidad: listaPosibilidades[i].tipo, ciclo: listaPosibilidades[i].ciclo});
-                }
-            }
+    // Rellenamos un array de latitud-longitud con la lista de posibilidades (El tipo de movimiento)
+    // y el país seleccionado
+    for (var i in listaPosibilidades) {
+      if (listaPosibilidades[i].pais === document.getElementById("comboPaises").value) {
+        if (!arrayLongitudLatitud.includes(traducirCiudadPosicion(listaPosibilidades[i].ciudad, listaPosibilidades[i].pais))) {
+          arrayLongitudLatitud.push(traducirCiudadPosicion(listaPosibilidades[i].ciudad, listaPosibilidades[i].pais));
+          arrayCiudades.push(listaPosibilidades[i].ciudad);
+          arrayInformacion.push({
+            movilidad: listaPosibilidades[i].tipo,
+            ciclo: listaPosibilidades[i].ciclo
+          });
         }
-        montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion, true);
-    } else {
-        // Rellenamos un array de latitud-longitud con la lista de posibilidades (El tipo de movimiento)
-        // y el país seleccionado
-        var listaCheckBox = document.querySelectorAll(".ciclo");
-        var arrayCiclosSeleccionados = new Array();
-        for (var i = 0; i < listaCheckBox.length; i++) {
-            if (listaCheckBox[i].checked) {
-                arrayCiclosSeleccionados.push(listaCheckBox[i].value);
-            }
-        }
-        for (var i in listaPosibilidades) {
-            if (arrayCiclosSeleccionados.includes(listaPosibilidades[i].ciclo)) {
-                arrayLongitudLatitud.push(traducirCiudadPosicion(listaPosibilidades[i].ciudad, listaPosibilidades[i].pais));
-                arrayCiudades.push(listaPosibilidades[i].ciudad);
-                arrayInformacion.push({movilidad: listaPosibilidades[i].tipo, ciclo: listaPosibilidades[i].ciclo});
-            }
-        }
-        montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion, false);
+      }
     }
+    montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion, true);
+  } else {
+    // Rellenamos un array de latitud-longitud con la lista de posibilidades (El tipo de movimiento)
+    // y el país seleccionado
+    var listaCheckBox = document.querySelectorAll(".ciclo");
+    var arrayCiclosSeleccionados = new Array();
+    for (var i = 0; i < listaCheckBox.length; i++) {
+      if (listaCheckBox[i].checked) {
+        arrayCiclosSeleccionados.push(listaCheckBox[i].value);
+      }
+    }
+    for (var i in listaPosibilidades) {
+      if (arrayCiclosSeleccionados.includes(listaPosibilidades[i].ciclo)) {
+        arrayLongitudLatitud.push(traducirCiudadPosicion(listaPosibilidades[i].ciudad, listaPosibilidades[i].pais));
+        arrayCiudades.push(listaPosibilidades[i].ciudad);
+        arrayInformacion.push({
+          movilidad: listaPosibilidades[i].tipo,
+          ciclo: listaPosibilidades[i].ciclo
+        });
+      }
+    }
+    montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion, false);
+  }
 }
 
 /**
@@ -265,53 +271,53 @@ function montarMapa() {
  * @return {undefined} undefined
  */
 function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion, tenemosPaises) {
-    var image = null;
-    for (var j in arrayLongitudLatitud) {
-        if (tenemosPaises) {
-            var image = "img/" + document.getElementById("comboPaises").value.replace(" ", "-").normalize('NFD').replace(/[\u0300-\u036f]/g, "") + ".png";
+  var image = null;
+  for (var j in arrayLongitudLatitud) {
+    if (tenemosPaises) {
+      var image = "img/" + document.getElementById("comboPaises").value.replace(" ", "-").normalize('NFD').replace(/[\u0300-\u036f]/g, "") + ".png";
+    }
+    //console.log(arrayLongitudLatitud[j]+"<- LONGLAT || Ciudad ->"+arrayCiudades[j]);
+    var marker = new google.maps.Marker({
+      position: arrayLongitudLatitud[j],
+      title: arrayCiudades[j],
+      draggable: false,
+      animation: google.maps.Animation.DROP,
+      icon: image
+    });
+    // NUEVO ATRIBUTO
+    marker.informacion = arrayInformacion[j];
+    marker.setMap(map);
+    markersEnMapa.push(marker);
+  }
+  for (var i = 0; i < markersEnMapa.length; i++) {
+    google.maps.event.addListener(markersEnMapa[i], 'click',
+      function() {
+        if (globalInfoWindow) {
+          globalInfoWindow.close();
         }
-        //console.log(arrayLongitudLatitud[j]+"<- LONGLAT || Ciudad ->"+arrayCiudades[j]);
-        var marker = new google.maps.Marker({
-            position: arrayLongitudLatitud[j],
-            title: arrayCiudades[j],
-            draggable: false,
-            animation: google.maps.Animation.DROP,
-            icon: image
+        var contentString = "Este sitio es <strong>" + this.title + "</strong><br>" +
+          "En él se ha realizado un Erasmus del ciclo de <strong>" + this.informacion.ciclo + "</strong><br>" +
+          "Para los integrantes del grupo de <strong>" + this.informacion.movilidad + "</strong>";
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
         });
-        // NUEVO ATRIBUTO
-        marker.informacion = arrayInformacion[j];
-        marker.setMap(map);
-        markersEnMapa.push(marker);
-    }
-    for (var i = 0; i < markersEnMapa.length; i++) {
-        google.maps.event.addListener(markersEnMapa[i], 'click',
-                function () {
-                    if (globalInfoWindow) {
-                        globalInfoWindow.close();
-                    }
-                    var contentString = "Este sitio es <strong>" + this.title + "</strong><br>" +
-                            "En él se ha realizado un Erasmus del ciclo de <strong>" + this.informacion.ciclo + "</strong><br>" +
-                            "Para los integrantes del grupo de <strong>" + this.informacion.movilidad + "</strong>";
-                    var infowindow = new google.maps.InfoWindow({
-                        content: contentString
-                    });
-                    if (this.getAnimation() !== null) {
-                      this.setAnimation(null);
-                    } else {
-                      this.setAnimation(google.maps.Animation.BOUNCE);
-                    }
-                    for(var i in markersEnMapa){
-                      if(markersEnMapa[i] !== this){
-                        markersEnMapa[i].setAnimation(null);
-                      }
-                    }
-                    infowindow.open(map, this);
-                    globalInfoWindow = infowindow;
-                    map.setZoom(parseInt(document.getElementById("zoomVariable").value));
-                    map.setCenter(this.getPosition());
-                }
-        );
-    }
+        if (this.getAnimation() !== null) {
+          this.setAnimation(null);
+        } else {
+          this.setAnimation(google.maps.Animation.BOUNCE);
+        }
+        for (var i in markersEnMapa) {
+          if (markersEnMapa[i] !== this) {
+            markersEnMapa[i].setAnimation(null);
+          }
+        }
+        infowindow.open(map, this);
+        globalInfoWindow = infowindow;
+        map.setZoom(parseInt(document.getElementById("zoomVariable").value));
+        map.setCenter(this.getPosition());
+      }
+    );
+  }
 }
 /* -------------------- F U N C I O N E S | H E L P E R --------------------- */
 
@@ -325,22 +331,23 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
  */
 
 function crearNodo(tipo, texto, atributos, valores) {
-    var nodoTexto;
-    var nodoP = document.createElement(tipo);
-    if (texto) {
-        nodoTexto = document.createTextNode(texto);
-        nodoP.appendChild(nodoTexto);
-    }
-    for (var i in atributos) {
-        nodoP.setAttribute(atributos[i], valores[i]);
-    }
+  var nodoTexto;
+  var nodoP = document.createElement(tipo);
+  if (texto) {
+    nodoTexto = document.createTextNode(texto);
+    nodoP.appendChild(nodoTexto);
+  }
+  for (var i in atributos) {
+    nodoP.setAttribute(atributos[i], valores[i]);
+  }
 
-    return nodoP;
+  return nodoP;
 }
+
 function limpiarChildren(elemento) {
-    while (elemento.firstChild) {
-        elemento.removeChild(elemento.firstChild);
-    }
+  while (elemento.firstChild) {
+    elemento.removeChild(elemento.firstChild);
+  }
 }
 
 /**
@@ -350,32 +357,32 @@ function limpiarChildren(elemento) {
  * @return {undefined}          undefined
  */
 function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'JSON/Erasmus.json', false);
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState === 4 && xobj.status === 200) {
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
+  var xobj = new XMLHttpRequest();
+  xobj.overrideMimeType("application/json");
+  xobj.open('GET', 'JSON/Erasmus.json', false);
+  xobj.onreadystatechange = function() {
+    if (xobj.readyState === 4 && xobj.status === 200) {
+      callback(xobj.responseText);
+    }
+  };
+  xobj.send(null);
 }
 /**
  * CARGA INICIAL DEL MAPA
  * Lo asignamos a una variable global
  */
 function cargaInicialMapaGoogle() {
-    var nuevoZoom = 5;
-    // Zoom del teléfono
-    if(window.innerWidth <= 525){
-        nuevoZoom = 4;
-    }
-    var respuesa = traducirCiudadPosicion("Múnich", "Alemania");
-    var mapProp = {
-        center: new google.maps.LatLng(respuesa.lat, respuesa.lng),
-        zoom: nuevoZoom
-    };
-    map = new google.maps.Map(document.getElementById("Mapa"), mapProp);
+  var nuevoZoom = 5;
+  // Zoom del teléfono
+  if (window.innerWidth <= 525) {
+    nuevoZoom = 4;
+  }
+  var respuesa = traducirCiudadPosicion("Múnich", "Alemania");
+  var mapProp = {
+    center: new google.maps.LatLng(respuesa.lat, respuesa.lng),
+    zoom: nuevoZoom
+  };
+  map = new google.maps.Map(document.getElementById("Mapa"), mapProp);
 }
 
 /**
@@ -387,15 +394,15 @@ function cargaInicialMapaGoogle() {
  * @return {type}              undefined
  */
 function geocodificacion(callback, nombreCiudad, nombrePais) {
-    var xobj = new XMLHttpRequest();
-    nombreCiudad = nombreCiudad.replace(" ", "+");
-    // PUESTO EN MODO SÍNCRONO
-    // Para un futuro tiene que estar asíncrono
-    xobj.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?address=" + nombrePais + "," + nombreCiudad + "&key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE", false);
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState === 4 && xobj.status === 200) {
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);
+  var xobj = new XMLHttpRequest();
+  nombreCiudad = nombreCiudad.replace(" ", "+");
+  // PUESTO EN MODO SÍNCRONO
+  // Para un futuro tiene que estar asíncrono
+  xobj.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?address=" + nombrePais + "," + nombreCiudad + "&key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE", false);
+  xobj.onreadystatechange = function() {
+    if (xobj.readyState === 4 && xobj.status === 200) {
+      callback(xobj.responseText);
+    }
+  };
+  xobj.send(null);
 }

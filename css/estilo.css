@@ -1,204 +1,221 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-h1{
-    font-family: sans-serif;
-    text-align: center;
-    background-color: #919fb7;
-    border-bottom: 1px solid black;
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #919fb7;
+  border-bottom: 1px solid black;
 }
-#seleccion{
+
+#seleccion {
   width: 100%;
 }
-#Controles{
+
+#Controles {
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+#Controles>div {
+  border-bottom: 1px solid black;
+}
+
+label {
+  font-weight: bolder;
+  font-family: sans-serif;
+  vertical-align: top;
+  font-size: 1.2em;
+}
+
+#Mapa {
+  width: 100%;
+  height: 75vh;
+}
+
+input[type="checkbox"] {
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+button {
+  background-color: #213656;
+  color: white;
+  text-decoration: none;
+  font-family: sans-serif;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 1.3em;
+  width: 12em;
+}
+
+#botonColapsar {
+  display: none;
+}
+
+#Mapa div {
+  border: initial;
+}
+
+select {
+  color: white;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  height: 35px;
+  padding: 5px;
+  /* If you add too much padding here, the options won't show in IE */
+  width: 9em;
+  background-color: #213656;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 1.3em;
+}
+
+#contenedorCheckboxes {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+#contenedorCheckboxes label {
+  flex: 1 0 calc(100%/2);
+  border: 1px solid black;
+  box-sizing: border-box;
+  background: antiquewhite;
+  color: #171e42;
+}
+
+.verticalAlign {
+  font-weight: bolder;
+  font-family: sans-serif;
+}
+
+#zonaNoVariable {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  padding-bottom: 0.5em;
+}
+
+#botonEnviar {
+  background-color: #213699;
+}
+
+#botonEnviar:active {
+  background-color: #2136ff;
+  -webkit-box-shadow: inset 0px 0px 90px 10px rgba(0, 0, 0, 1);
+  -moz-box-shadow: inset 0px 0px 90px 10px rgba(0, 0, 0, 1);
+  box-shadow: inset 0px 0px 90px 10px rgba(0, 0, 0, 1);
+}
+
+@media screen and (max-width: 525px) {
+  #Controles {
     width: 100%;
-    border-bottom: 1px solid black;
-}
-#Controles>div{
-    border-bottom: 1px solid black;
-}
-label{
-    font-weight: bolder;
-    font-family: sans-serif;
-    vertical-align: top;
-    font-size: 1.2em;
-}
-#Mapa{
+    height: 0vh;
+  }
+  #Mapa {
     width: 100%;
-    height: 75vh;
-}
-input[type="checkbox"]{
-    border-radius: 5px;
-    width:20px;
-    height:20px;
-}
-button{
-    background-color:#213656;
-    color: white;
-    text-decoration: none;
-    font-family: sans-serif;
-    border-radius: 15px;
-    padding: 10px;
-    font-size: 1.3em;
-    width: 12em;
-}
-#botonColapsar{
-    display: none;
-}
-#Mapa div{
-    border: initial;
-}
-select{
-    color: white;
-    background: transparent;
-    border: none;
-    font-size: 14px;
-    height: 35px;
-    padding: 5px; /* If you add too much padding here, the options won't show in IE */
-    width: 9em;
-    background-color: #213656;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    font-size: 1.3em;
-}
-#contenedorCheckboxes{
+    height: 85vh;
+  }
+  button {
     width: 100%;
+  }
+  #botonColapsar {
+    display: initial;
+  }
+  #botonEnviar {
+    margin-top: 1em;
+    width: 100%;
+  }
+  #cajaSwitch {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-}
-#contenedorCheckboxes label{
-    flex: 1 0 calc(100%/2);
-    border: 1px solid black;
-    box-sizing: border-box;
-    background: antiquewhite;
-    color: #171e42;
-}
-.verticalAlign{
-    font-weight: bolder;
-    font-family: sans-serif;
-}
-#zonaNoVariable{
+  }
+  #zonaNoVariable {
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
-    padding-bottom: 0.5em;
+    padding-bottom: 1em;
+  }
+  #zonaNoVariable>div:nth-child(2) {
+    margin-left: 0em;
+    margin-top: 1em;
+  }
+  select {
+    width: 100%;
+  }
 }
-#botonEnviar{
-    background-color:#213699;
-}
-#botonEnviar:active{
-    background-color:#2136ff;
-    -webkit-box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
--moz-box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
-box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
-}
-
-@media screen and (max-width: 525px){
-    #Controles{
-        width: 100%;
-        height: 0vh;
-    }
-    #Mapa{
-        width: 100%;
-        height: 85vh;
-    }
-    button{
-      width: 100%;
-    }
-    #botonColapsar{
-        display:initial;
-    }
-    #botonEnviar{
-      margin-top: 1em;
-      width: 100%;
-    }
-    #cajaSwitch{
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-around;
-    }
-    #zonaNoVariable{
-        display: flex;
-        flex-flow: column wrap;
-        justify-content: flex-start;
-        padding-bottom: 1em;
-    }
-    #zonaNoVariable>div:nth-child(2){
-        margin-left:0em;
-        margin-top:1em;
-    }
-    select{
-        width:100%;
-    }
-}
-
-
-
-
-
 
 /*********************************
 ** ESTILO PARA EL TOGGLE-SWITCH **
 *********************************/
+
 .switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-    transform: scale(0.6,0.6);
-    border: 2px solid gray;
-    border-radius: 90px;
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  transform: scale(0.6, 0.6);
+  border: 2px solid gray;
+  border-radius: 90px;
 }
 
-.switch input {display:none;}
+.switch input {
+  display: none;
+}
 
 .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
 .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-input:checked + .slider {
-    background-color: #000000;
+input:checked+.slider {
+  background-color: #000000;
 }
 
-input:focus + .slider {
-    box-shadow: 0 0 1px #000000;
+input:focus+.slider {
+  box-shadow: 0 0 1px #000000;
 }
 
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
 /* Rounded sliders */
+
 .slider.round {
-    border-radius: 34px;
+  border-radius: 34px;
 }
 
 .slider.round:before {
-    border-radius: 50%;
+  border-radius: 50%;
 }
