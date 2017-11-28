@@ -9,6 +9,9 @@ h1{
     background-color: #919fb7;
     border-bottom: 1px solid black;
 }
+#seleccion{
+  width: 100%;
+}
 #Controles{
     width: 100%;
     border-bottom: 1px solid black;
@@ -39,6 +42,7 @@ button{
     border-radius: 15px;
     padding: 10px;
     font-size: 1.3em;
+    width: 12em;
 }
 #botonColapsar{
     display: none;
@@ -77,15 +81,11 @@ select{
     font-weight: bolder;
     font-family: sans-serif;
 }
-
 #zonaNoVariable{
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: flex-start;
-    padding-bottom: 1em;
-}
-#zonaNoVariable>div:nth-child(2){
-    margin-left:2em;
+    padding-bottom: 0.5em;
 }
 #botonEnviar{
     background-color:#213699;
@@ -106,8 +106,10 @@ box-shadow: inset 0px 0px 90px 10px rgba(0,0,0,1);
         width: 100%;
         height: 85vh;
     }
-    #botonColapsar{
+    button{
       width: 100%;
+    }
+    #botonColapsar{
         display:initial;
     }
     #botonEnviar{
