@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- 
+        
+        ATENCIÓN, CAMBIOS EN EL JSON:
+
+        1) Había un registro mal hecho, ponía "Pais:Amsterdam", "Ciudad:Holanda".
+        2) Todos los profesores tienen "Ciclo" excepto uno que tenía "Departamento", lo puse a "Ciclo" también.
+        
+
+        Select para el tipo de movilidad
+        Toggle para "Nombre de ciclo" o "Pais"
+        Si selecciona Nombre del ciclo, sale una lista de checkboxes para comprobar los ciclos en el mapa
+        Habrá un botón para seleccioanr todas las chekboxes o deseleccionarlas
+        Si está el toggle en país sale un select con los paises.
+
+        Botón de buscar para que se marque en el mapa de la google api los lugares/paises
+        que se están buscando
+
+        OBLIGATORIO QUE SEA RESPONSIVO
+        
+        Mapa:                               https://www.w3schools.com/graphics/google_maps_intro.asp
+        Funciones y como sacar la clave:    https://www.w3schools.com/graphics/google_maps_basic.asp
+        Marcadores:                         https://www.w3schools.com/graphics/google_maps_overlays.asp
+
+        El JSON tendrá las ciudades de la movilidad tal que así:
+
+        "ciudad":"Bologna"
+
+        Cambiar a esto:
+
+        "ciudad":{"nombre":"Bologna","latitud":"30","longitud":"40"};
+
+        PARA GOOGLE MAPS
+
+        0.Key
+        1.Div
+        2.Zoom
+        3.Center
+
+        AÑADIDOS:
+
+        1) Capacidad de hacer centro en determinados países
+        
+-->
+<html>
+    <head>
+        <link rel="shortcut icon" href="favicon.ico" />
+        <title>Mapa Google Maps</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/estilo.css">
+        <!-- Hace falta una clave -->
+        <!-- IMPORTANTÍSIMO: SACAR LA CLAVE EN CASA -->
+        <!-- key=MI_CLAVE y luego callback=FUNCION_CARGA_MAPA -->
+        <script src="js/markerclusterer.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+            <button id="botonColapsar" type="button">Extiende/Colapsa el menú</button>
+        <div id="Controles">
+            <div id="cajaMov">
+            <label>
+                Selección de movilidad
+                <select name="seleccionMovilidad" id="seleccionMovilidad">
+                    <option value="Todos" selected>Todos</option>
+                    <option value="profesores">Profesores</option>
+                    <option value="GM">Grado Medio</option>
+                    <option value="GS">Grado Superior</option>
+                </select>
+            </label>
+            </div>
+            <div id="cajaSwitch">
+            <span class="verticalAlign"> Ciclos </span>
+            <label class="switch" id="clickCicloPais">
+                <input type="checkbox" id="selectorCicloPais" checked>
+                <span class="slider round"></span>
+            </label>
+            <span class="verticalAlign"> Paises </span>
+            </div>
+            <div id="zonaVariable">
+            </div>
+            <button id="botonEnviar" type="button">Busca en el mapa</button>
+        </div>
+        <div id="Mapa"></div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE&callback=cargaInicialMapaGoogle"></script>
+    </body>
+</html>
