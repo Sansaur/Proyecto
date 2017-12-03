@@ -7,9 +7,14 @@ h1{
     font-family: sans-serif;
     text-align: center;
     background-color: #919fb7;
+    border-bottom: 1px solid black;
 }
 #Controles{
     width: 100%;
+    border-bottom: 1px solid black;
+}
+#Controles>div{
+    border-bottom: 1px solid black;
 }
 label{
     font-weight: bolder;
@@ -73,6 +78,16 @@ select{
     font-family: sans-serif;
 }
 
+#zonaNoVariable{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    padding-bottom: 1em;
+}
+#zonaNoVariable>div:nth-child(2){
+    margin-left:2em;
+}
+
 @media screen and (max-width: 525px){
     #Controles{
         width: 100%;
@@ -89,6 +104,16 @@ select{
         display: flex;
         flex-flow: row wrap;
         justify-content: space-around;
+    }
+    #zonaNoVariable{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: flex-start;
+        padding-bottom: 1em;
+    }
+    #zonaNoVariable>div:nth-child(2){
+        margin-left:0em;
+        margin-top:1em;
     }
 }
 

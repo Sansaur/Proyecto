@@ -109,13 +109,15 @@ function cargarPaises() {
             listaPaises.push(listaPosibilidades[i].pais);
         }
     }
+    var nuevaLabel = crearNodo("LABEL", "Selecciona un país: ", ["title"], ["Selecciona un país"]);
     var nuevoElemento = crearNodo("SELECT", null, ["id", "title"], ["comboPaises", "Selecciona un país"]);
+    nuevaLabel.appendChild(nuevoElemento);
     for (var i in listaPaises) {
         if (listaPaises[i]) {
             nuevoElemento.appendChild(crearNodo("OPTION", listaPaises[i], ["value"], [listaPaises[i]]));
-            document.getElementById("zonaVariable").appendChild(nuevoElemento);
         }
     }
+    document.getElementById("zonaVariable").appendChild(nuevaLabel);
 }
 
 function cargarCiclos() {
@@ -127,7 +129,7 @@ function cargarCiclos() {
         }
     }
     var nuevoElemento = crearNodo("P", null, null, null);
-    var nuevoButton = crearNodo("BUTTON", "Selecciona todas si están todas vacías. Deselecciona todas si hay al menos una seleccionada", ["id"], ["seleccion"]);
+    var nuevoButton = crearNodo("BUTTON", "Selecciona todas si están todas vacías. Deselecciona todas si hay al menos una seleccionada", ["id", "title"], ["seleccion", "Seleccionar/Deseleccionar todo"]);
     nuevoButton.addEventListener('click', function () {
         var listaCheckBoxCreados = document.querySelectorAll(".ciclo");
         var deseleccionar = false;
@@ -345,9 +347,9 @@ function cargaInicialMapaGoogle() {
     var nuevoZoom = 5;
     // Zoom del teléfono
     if(window.innerWidth <= 525){
-        nuevoZoom = 3;
+        nuevoZoom = 4;
     }
-    var respuesa = traducirCiudadPosicion("Graz", "Austria");
+    var respuesa = traducirCiudadPosicion("Múnich", "Alemania");
     var mapProp = {
         center: new google.maps.LatLng(respuesa.lat, respuesa.lng),
         zoom: nuevoZoom
