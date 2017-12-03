@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- 
-        
+<!--
+
         ATENCIÓN, CAMBIOS EN EL JSON:
 
         1) Había un registro mal hecho, ponía "Pais:Amsterdam", "Ciudad:Holanda".
         2) Todos los profesores tienen "Ciclo" excepto uno que tenía "Departamento", lo puse a "Ciclo" también.
-        
+
 
         Select para el tipo de movilidad
         Toggle para "Nombre de ciclo" o "Pais"
@@ -17,7 +17,7 @@
         que se están buscando
 
         OBLIGATORIO QUE SEA RESPONSIVO
-        
+
         Mapa:                               https://www.w3schools.com/graphics/google_maps_intro.asp
         Funciones y como sacar la clave:    https://www.w3schools.com/graphics/google_maps_basic.asp
         Marcadores:                         https://www.w3schools.com/graphics/google_maps_overlays.asp
@@ -40,7 +40,7 @@
         AÑADIDOS:
 
         1) Capacidad de hacer centro en determinados países
-        
+
 -->
 <html>
     <head>
@@ -57,11 +57,12 @@
     </head>
     <body>
             <button id="botonColapsar" type="button">Extiende/Colapsa el menú</button>
+            <h1> ¿Donde se hace el Erasmus? </h1>
         <div id="Controles">
             <div id="cajaMov">
             <label>
                 Selección de movilidad
-                <select name="seleccionMovilidad" id="seleccionMovilidad">
+                <select title="Selecciona la movilidad" name="seleccionMovilidad" id="seleccionMovilidad">
                     <option value="Todos" selected>Todos</option>
                     <option value="profesores">Profesores</option>
                     <option value="GM">Grado Medio</option>
@@ -70,12 +71,12 @@
             </label>
             </div>
             <div id="cajaSwitch">
-            <span class="verticalAlign"> Ciclos </span>
-            <label class="switch" id="clickCicloPais">
-                <input type="checkbox" id="selectorCicloPais" checked>
+            <label for="selectorCicloPais" class="verticalAlign"> Ciclos </label>
+            <label class="switch" title="Cambiar filtro entre Ciclos o Paises"  id="clickCicloPais"> S
+                <input type="checkbox" title="Cambiar filtro entre Ciclos o Paises" id="selectorCicloPais" checked>
                 <span class="slider round"></span>
             </label>
-            <span class="verticalAlign"> Paises </span>
+            <label for="selectorCicloPais" class="verticalAlign"> Paises </label>
             </div>
             <div id="zonaVariable">
             </div>

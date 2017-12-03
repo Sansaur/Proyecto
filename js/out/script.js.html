@@ -1,6 +1,34 @@
-/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: script.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: script.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*
  *
- * <div>Icons made by <a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+ * &lt;div>Icons made by &lt;a href="https://www.flaticon.com/authors/dave-gandy" title="Dave Gandy">Dave Gandy&lt;/a> from &lt;a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com&lt;/a> is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY&lt;/a>&lt;/div>
  */
 // Cargamos el JS así
 window.onload = cargarPag;
@@ -109,7 +137,7 @@ function cargarPaises() {
             listaPaises.push(listaPosibilidades[i].pais);
         }
     }
-    var nuevoElemento = crearNodo("SELECT", null, ["id", "title"], ["comboPaises", "Selecciona un país"]);
+    var nuevoElemento = crearNodo("SELECT", null, ["id"], ["comboPaises"]);
     for (var i in listaPaises) {
         if (listaPaises[i]) {
             nuevoElemento.appendChild(crearNodo("OPTION", listaPaises[i], ["value"], [listaPaises[i]]));
@@ -131,7 +159,7 @@ function cargarCiclos() {
     nuevoButton.addEventListener('click', function () {
         var listaCheckBoxCreados = document.querySelectorAll(".ciclo");
         var deseleccionar = false;
-        for (var i = 0; i < listaCheckBoxCreados.length; i++) {
+        for (var i = 0; i &lt; listaCheckBoxCreados.length; i++) {
             if (listaCheckBoxCreados[i].checked) {
                 deseleccionar = true;
                 break;
@@ -139,7 +167,7 @@ function cargarCiclos() {
             listaCheckBoxCreados[i].click();
         }
         if (deseleccionar) {
-            for (var i = 0; i < listaCheckBoxCreados.length; i++) {
+            for (var i = 0; i &lt; listaCheckBoxCreados.length; i++) {
                 listaCheckBoxCreados[i].checked = false;
             }
         }
@@ -226,7 +254,7 @@ function montarMapa() {
         // y el país seleccionado
         var listaCheckBox = document.querySelectorAll(".ciclo");
         var arrayCiclosSeleccionados = new Array();
-        for (var i = 0; i < listaCheckBox.length; i++) {
+        for (var i = 0; i &lt; listaCheckBox.length; i++) {
             if (listaCheckBox[i].checked) {
                 arrayCiclosSeleccionados.push(listaCheckBox[i].value);
             }
@@ -257,7 +285,7 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
         if (tenemosPaises) {
             var image = "img/" + document.getElementById("comboPaises").value.replace(" ", "-").normalize('NFD').replace(/[\u0300-\u036f]/g, "") + ".png";
         }
-        //console.log(arrayLongitudLatitud[j]+"<- LONGLAT || Ciudad ->"+arrayCiudades[j]);
+        //console.log(arrayLongitudLatitud[j]+"&lt;- LONGLAT || Ciudad ->"+arrayCiudades[j]);
         var marker = new google.maps.Marker({
             position: arrayLongitudLatitud[j],
             title: arrayCiudades[j],
@@ -270,15 +298,15 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
         marker.setMap(map);
         markersEnMapa.push(marker);
     }
-    for (var i = 0; i < markersEnMapa.length; i++) {
+    for (var i = 0; i &lt; markersEnMapa.length; i++) {
         google.maps.event.addListener(markersEnMapa[i], 'click',
                 function () {
                     if (globalInfoWindow) {
                         globalInfoWindow.close();
                     }
-                    var contentString = "Este sitio es <strong>" + this.title + "</strong><br>" +
-                            "En él se ha realizado un Erasmus del ciclo de <strong>" + this.informacion.ciclo + "</strong><br>" +
-                            "Para los integrantes del grupo de <strong>" + this.informacion.movilidad + "</strong>";
+                    var contentString = "Este sitio es &lt;strong>" + this.title + "&lt;/strong>&lt;br>" +
+                            "En él se ha realizado un Erasmus del ciclo de &lt;strong>" + this.informacion.ciclo + "&lt;/strong>&lt;br>" +
+                            "Para los integrantes del grupo de &lt;strong>" + this.informacion.movilidad + "&lt;/strong>";
                     var infowindow = new google.maps.InfoWindow({
                         content: contentString
                     });
@@ -331,7 +359,7 @@ function loadJSON(callback) {
     xobj.overrideMimeType("application/json");
     xobj.open('GET', 'JSON/Erasmus.json', false);
     xobj.onreadystatechange = function () {
-        if (xobj.readyState === 4 && xobj.status === 200) {
+        if (xobj.readyState === 4 &amp;&amp; xobj.status === 200) {
             callback(xobj.responseText);
         }
     };
@@ -344,7 +372,7 @@ function loadJSON(callback) {
 function cargaInicialMapaGoogle() {
     var nuevoZoom = 5;
     // Zoom del teléfono
-    if(window.innerWidth <= 525){
+    if(window.innerWidth &lt;= 525){
         nuevoZoom = 3;
     }
     var respuesa = traducirCiudadPosicion("Graz", "Austria");
@@ -368,11 +396,34 @@ function geocodificacion(callback, nombreCiudad, nombrePais) {
     nombreCiudad = nombreCiudad.replace(" ", "+");
     // PUESTO EN MODO SÍNCRONO
     // Para un futuro tiene que estar asíncrono
-    xobj.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?address=" + nombrePais + "," + nombreCiudad + "&key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE", false);
+    xobj.open('GET', "https://maps.googleapis.com/maps/api/geocode/json?address=" + nombrePais + "," + nombreCiudad + "&amp;key=AIzaSyCITn8nSbK_pJTA6IxMDLMuYb7A_dKoIsE", false);
     xobj.onreadystatechange = function () {
-        if (xobj.readyState === 4 && xobj.status === 200) {
+        if (xobj.readyState === 4 &amp;&amp; xobj.status === 200) {
             callback(xobj.responseText);
         }
     };
     xobj.send(null);
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#cargaInicialMapaGoogle">cargaInicialMapaGoogle</a></li><li><a href="global.html#cargarJSON">cargarJSON</a></li><li><a href="global.html#cargarPag">cargarPag</a></li><li><a href="global.html#geocodificacion">geocodificacion</a></li><li><a href="global.html#loadJSON">loadJSON</a></li><li><a href="global.html#montarMarcadores">montarMarcadores</a></li><li><a href="global.html#retornaListaSeleccioandos">retornaListaSeleccioandos</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Dec 02 2017 22:57:41 GMT+0000 (Hora estándar GMT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
