@@ -97,6 +97,9 @@ function traducirCiudadPosicion(ciudad, pais) {
         var nuestroJSON = JSON.parse(response);
         // Usar respuesta.lat y respuesta.lng ~~~~~
         devolver = nuestroJSON.results[0].geometry.location;
+        // Para que se separen un poco los stacks
+        devolver.lat += Math.random() / 15;
+        devolver.lng += Math.random() / 15;
     }, ciudad, pais);
     return devolver;
 }
@@ -286,7 +289,7 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
                     });
                     infowindow.open(map, this);
                     globalInfoWindow = infowindow;
-                    map.setZoom(8);
+                    map.setZoom(12);
                     map.setCenter(this.getPosition());
                 }
         );
