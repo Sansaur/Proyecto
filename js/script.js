@@ -78,6 +78,15 @@ function cargarEventos() {
         }
         booleanoColapsado = !booleanoColapsado;
     }, false);
+    document.getElementById("botonZoom").addEventListener('click', function () {
+        var nuevoZoom = 5;
+        // Zoom del teléfono
+        if (window.innerWidth <= 525) {
+            nuevoZoom = 4;
+        }
+        map.setZoom(nuevoZoom);
+        map.setCenter(traducirCiudadPosicion("Múnich", "Alemania"));
+    }, false);
 }
 
 function alternarPosibilidades() {
@@ -289,7 +298,7 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
                     });
                     infowindow.open(map, this);
                     globalInfoWindow = infowindow;
-                    map.setZoom(12);
+                    map.setZoom(parseInt(document.getElementById("zoomVariable").value));
                     map.setCenter(this.getPosition());
                 }
         );
