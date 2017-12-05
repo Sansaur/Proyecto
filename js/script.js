@@ -30,6 +30,7 @@ var booleanoColapsado = true;
  *
  */
 function cargarPag() {
+  document.getElementById("loader").setAttribute("style", "display:none");
   cargarEventos();
   cargarJSON();
   // Llamamos a altenrarPosibilidades una vez para que se nos genere el combo de los países
@@ -63,7 +64,9 @@ function cargarJSON() {
 
 function cargarEventos() {
   document.getElementById("botonEnviar").addEventListener('click', function() {
-    montarMapa();
+    document.getElementById("loader").setAttribute("style", "display:block");
+    // Menudo chustorrio,pero al menos muestra el load.
+    setTimeout(montarMapa, 500);
   }, false);
   document.getElementById("clickCicloPais").addEventListener('click', alternarPosibilidades, false);
   document.getElementById("seleccionMovilidad").addEventListener('change', alternarPosibilidades, false);
@@ -208,7 +211,6 @@ function retornaListaSeleccioandos() {
  *
  */
 function montarMapa() {
-
   var listaPosibilidades = retornaListaSeleccioandos();
   var arrayCiudades = new Array();
   var arrayLongitudLatitud = new Array();
@@ -318,6 +320,7 @@ function montarMarcadores(arrayLongitudLatitud, arrayCiudades, arrayInformacion,
       }
     );
   }
+    document.getElementById("loader").setAttribute("style", "display:none");
 }
 /* -------------------- F U N C I O N E S | H E L P E R --------------------- */
 

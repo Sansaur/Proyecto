@@ -115,6 +115,36 @@ select {
   box-shadow: inset 0px 0px 90px 10px rgba(0, 0, 0, 1);
 }
 
+/***********************************
+****** ESTILO PARA EL LOADER *******
+***********************************/
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid blue;
+  border-left: 16px solid yellow;
+  border-right: 16px solid red;
+  border-bottom: 16px solid green;
+  width: 6em;
+  height: 6em;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  position: absolute;
+  top: 15%;
+  left: 45%;
+  background-color: antiquewhite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 @media screen and (max-width: 525px) {
   #Controles {
     width: 100%;
@@ -151,6 +181,12 @@ select {
   }
   select {
     width: 100%;
+  }
+  .loader {
+    width: 1em;
+    height: 1em;
+    top: 12%;
+    left: 90%;
   }
 }
 
